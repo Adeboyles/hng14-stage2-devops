@@ -5,7 +5,11 @@ import os
 
 app = FastAPI()
 
-r = redis.Redis(host=os.environ.get("REDIS_HOST", "redis"), port=6379)
+r = redis.Redis(
+    host=os.environ.get("REDIS_HOST", "redis"),
+    port=6379
+)
+
 
 @app.post("/jobs")
 def create_job():
@@ -13,6 +17,7 @@ def create_job():
     r.lpush("job", job_id)
     r.hset(f"job:{job_id}", "status", "queued")
     return {"job_id": job_id}
+
 
 @app.get("/jobs/{job_id}")
 def get_job(job_id: str):
