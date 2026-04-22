@@ -9,7 +9,7 @@ FROM node:20-alpine
 WORKDIR /app
 
 # Create non-root user
-RUN adduser -D appuser
+RUN adduser --disabled-password --no-create-home appuser
 
 COPY --from=builder /app/node_modules ./node_modules
 COPY app.js .

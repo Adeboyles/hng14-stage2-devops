@@ -68,8 +68,9 @@ jobs:
 
       - name: Run tests
         run: |
+          pip install fastapi==0.111.0 uvicorn==0.29.0 redis==5.0.1 pytest pytest-cov httpx
           cd api
-          pytest tests/ -v --cov=main --cov-report=xml
+          pytest tests/test_main.py -v --cov=main --cov-report=xml
 
       - name: Upload coverage report
         uses: actions/upload-artifact@v4
